@@ -73,7 +73,13 @@ const MaruImg = ({ type, name, textColor = "black", order }: MaruImgProps) => {
       style={{ bottom }}
     >
       <span
-        className={cn("font-bold text-sm", textColor === "black" ? "text-black" : "text-white")}
+        className={cn(
+          "font-extrabold text-base",
+          textColor === "black" ? "text-black " : "text-white"
+        )}
+        style={{
+          WebkitTextStroke: "0.4px white"
+        }}
       >
         {name}
       </span>
