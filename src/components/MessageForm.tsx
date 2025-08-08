@@ -10,42 +10,61 @@ export default function MessageForm({
   const [submit, setSubmit] = useState(false);
 
   return (
-    <div className="relative bg-white p-6 rounded-lg shadow w-full max-w-md h-96 flex flex-col">
-      <h2 className="text-lg font-semibold mb-4">🎉 축하 메시지 남기기</h2>
+    <div className="relative bg-white rounded-lg shadow-lg p-6 border border-blue-100 w-full">
+      <h2 className="text-xl font-bold text-blue-800 mb-4 flex items-center">
+        🎉 축하 메시지 남기기
+      </h2>
 
-      <input
-        type="text"
-        placeholder="이름을 입력해주세요"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="w-full border border-gray-300 rounded px-3 py-2 mb-4"
-      />
-
-      <textarea
-        placeholder="따뜻한 축하 메시지를 남겨주세요 (최대 500자)"
-        value={message}
-        onChange={(e) => setMessage(e.target.value)}
-        maxLength={500}
-        className="w-full border border-gray-300 rounded px-3 py-2 resize-none h-full mb-2"
-      />
-
-      <div className="text-right text-sm text-gray-500 mb-4">{message.length}/500</div>
-
-      <button
-        onClick={() => {
+      <form
+        className="space-y-4"
+        onSubmit={(e) => {
+          e.preventDefault();
           if (name && message) {
             onSubmit(name, message);
             setSubmit(true);
           }
         }}
-        className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700"
       >
-        축하 메시지 등록
-      </button>
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-blue-700 mb-1">
+            이름
+          </label>
+          <input
+            type="text"
+            id="name"
+            className="w-full px-4 py-2 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm"
+            placeholder="이름을 입력해주세요"
+            name="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+
+        <div>
+          <label htmlFor="message" className="block text-sm font-medium text-blue-700 mb-1">
+            축하 메시지
+          </label>
+          <textarea
+            id="message"
+            name="message"
+            className="w-full px-4 py-2 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm resize-none bg-gray-100"
+            rows={4}
+            placeholder="따뜻한 축하 메시지를 남겨주세요 (최대 500자)"
+            maxLength={500}
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
+          <div className="text-right text-xs text-blue-500 mt-1">{message.length}/500</div>
+        </div>
+        <button className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white py-3 px-4 rounded-lg transition-colors font-medium whitespace-nowrap cursor-pointer">
+          축하 메시지 등록
+        </button>
+      </form>
+
       {submit && (
         <>
-          <div className="absolute inset-0 bg-gray-600/40 z-20" />
-          <p className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center px-4 text-lg font-semibold max-w-[80%]">
+          <div className="absolute inset-0 bg-gray-600/40 z-20 rounded-lg" />
+          <p className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white text-center px-8 text-lg font-semibold w-full">
             메세지는 졸업식날 본인에게 공개됩니다!
           </p>
         </>

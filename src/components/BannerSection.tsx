@@ -1,8 +1,10 @@
-import { FlowerIcon } from "lucide-react";
 import { useMemo } from "react";
+import CelebrationCount from "./CelebrationCount";
+import MessageNotice from "./MessageNotice";
+import LeafFlowerIcon from "./icon/LeafFlowerIcon";
 
-export default function BannerSection({ flowerCount = 0 }: { flowerCount?: number }) {
-  const minDistance = 2;
+export default function BannerSection({ flowerCount = 10 }: { flowerCount?: number }) {
+  const minDistance = 3;
 
   const flowers = useMemo(() => {
     const positions: { id: number; top: number; left: number }[] = [];
@@ -27,19 +29,32 @@ export default function BannerSection({ flowerCount = 0 }: { flowerCount?: numbe
   }, [flowerCount]);
 
   return (
-    <section className="flex justify-center pt-4 bg-blue-50 w-full px-4 relative">
-      <img src="/banner.png" alt="banner" className="object-contain w-full z-0 relative max-w-md" />
+    <section className="flex flex-col items-center pb-8 bg-blue-50">
+      <div className="relative w-full mx-auto">
+        <section className="flex justify-center pt-4 bg-blue-50 w-full px-8 relative">
+          <img
+            src="/image.png"
+            alt="banner"
+            className="object-contain w-full z-0 relative rounded-lg"
+          />
 
-      {flowers.map((pos) => (
-        <FlowerIcon
-          key={pos.id}
-          className="text-red-500 size-12 absolute z-20"
-          style={{
-            top: `${pos.top}%`,
-            left: `${pos.left}%`
-          }}
-        />
-      ))}
+          {flowers.map((pos) => (
+            <LeafFlowerIcon
+              key={pos.id}
+              leafColor="purple-400"
+              animationDelay="0.3s"
+              animationDuration="2s"
+              style={{
+                top: `${pos.top}%`,
+                right: `${pos.left}%`
+              }}
+            />
+          ))}
+        </section>
+
+        <CelebrationCount count={5} />
+      </div>
+      <MessageNotice />
     </section>
   );
 }
