@@ -25,7 +25,7 @@ const MainPage = () => {
     <>
       <Header />
       <BannerSection />
-      <main className="grid grid-cols-1 px-8 bg-blue-50 pb-8">
+      <main className="grid grid-cols-1 px-7 bg-blue-50 pb-8">
         <MessageForm onSubmit={addMessage} />
       </main>
       <LinkButton />

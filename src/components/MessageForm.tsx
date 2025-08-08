@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SelectMaru from "./SelectMaru";
 
 export default function MessageForm({
   onSubmit
@@ -11,9 +12,7 @@ export default function MessageForm({
 
   return (
     <div className="relative bg-white rounded-lg shadow-lg p-6 border border-blue-100 w-full">
-      <h2 className="text-xl font-bold text-blue-800 mb-4 flex items-center">
-        🎉 축하 메시지 남기기
-      </h2>
+      <h2 className="text-xl font-bold text-blue mb-4 flex items-center">🎉 축하 메시지 남기기</h2>
 
       <form
         className="space-y-4"
@@ -25,8 +24,10 @@ export default function MessageForm({
           }
         }}
       >
+        <SelectMaru />
+
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-blue-700 mb-1">
+          <label htmlFor="name" className="block text-base font-medium text-gray mb-1">
             이름
           </label>
           <input
@@ -41,22 +42,22 @@ export default function MessageForm({
         </div>
 
         <div>
-          <label htmlFor="message" className="block text-sm font-medium text-blue-700 mb-1">
+          <label htmlFor="message" className="block text-base font-medium text-gray mb-1">
             축하 메시지
           </label>
           <textarea
             id="message"
             name="message"
-            className="w-full px-4 py-2 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm resize-none bg-gray-100"
+            className="w-full px-4 py-2 border border-blue-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm resize-none"
             rows={4}
             placeholder="따뜻한 축하 메시지를 남겨주세요 (최대 500자)"
             maxLength={500}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
-          <div className="text-right text-xs text-blue-500 mt-1">{message.length}/500</div>
+          <div className="text-right text-xs text-blue mt-1">{message.length}/500</div>
         </div>
-        <button className="w-full bg-blue-600 hover:bg-blue-700 disabled:bg-blue-300 text-white py-3 px-4 rounded-lg transition-colors font-medium whitespace-nowrap cursor-pointer">
+        <button className="w-full bg-blue hover:bg-blue/90 active:bg-blue/90 disabled:bg-blue/30 text-white py-3 px-4 rounded-lg transition-colors font-medium whitespace-nowrap cursor-pointer">
           축하 메시지 등록
         </button>
       </form>
