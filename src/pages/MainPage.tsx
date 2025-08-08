@@ -1,5 +1,6 @@
 import BannerSection from "@/components/BannerSection";
 import Header from "@/components/Header";
+import LinkButton from "@/components/LinkButton";
 import MessageForm from "@/components/MessageForm";
 import { useState } from "react";
 
@@ -24,9 +25,10 @@ const MainPage = () => {
     <>
       <Header />
       <BannerSection />
-      <main className="flex flex-col md:flex-row items-center gap-8 justify-center py-8 px-4 bg-blue-50 flex-1 ">
+      <main className="grid grid-cols-1 px-8 bg-blue-50 pb-8">
         <MessageForm onSubmit={addMessage} />
       </main>
+      <LinkButton />
     </>
   );
 };
