@@ -4,14 +4,18 @@ import tailwindcss from "@tailwindcss/vite";
 import fs from "fs";
 import path from "path";
 
+const isLocal = !process.env.VERCEL;
+
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [tailwindcss(), react()],
   server: {
-    https: {
-      key: fs.readFileSync(path.resolve(__dirname, "localhost+2-key.pem")),
-      cert: fs.readFileSync(path.resolve(__dirname, "localhost+2.pem"))
-    },
+    ...(isLocal && {
+      https: {
+        key: fs.readFileSync(path.resolve(__dirname, "localhost+2-key.pem")),
+        cert: fs.readFileSync(path.resolve(__dirname, "localhost+2.pem"))
+      }
+    }),
     host: true
   },
   resolve: {
