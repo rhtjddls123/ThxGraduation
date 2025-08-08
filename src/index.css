@@ -118,3 +118,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+@theme {
+  --color-blue: #1969cc;
+  --color-gray: #3a3a3a;
+}
