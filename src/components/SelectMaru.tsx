@@ -1,4 +1,4 @@
-import { useState } from "react";
+import type { MaruType } from "@/types/type";
 
 const maruList = [
   { id: 1, name: "maru1", src: "/maru1.png" },
@@ -8,9 +8,12 @@ const maruList = [
   { id: 5, name: "maru5", src: "/maru5.png" }
 ];
 
-const SelectMaru = () => {
-  const [selectedId, setSelectedId] = useState<number>(1);
+interface SelectMaruProps {
+  selectedMaru: MaruType;
+  onSelect: (id: MaruType) => void;
+}
 
+const SelectMaru = ({ selectedMaru, onSelect }: SelectMaruProps) => {
   return (
     <div>
       <h2 className="block text-base font-medium text-gray mb-1">마루 선택</h2>
@@ -18,10 +21,10 @@ const SelectMaru = () => {
         {maruList.map((maru) => (
           <button
             key={maru.id}
-            onClick={() => setSelectedId(maru.id)}
+            onClick={() => onSelect(maru.id)}
             className={`
               rounded-full border-4 
-              ${selectedId === maru.id ? "border-blue" : "border-transparent"}
+              ${selectedMaru === maru.id ? "border-blue" : "border-transparent"}
               focus:outline-none
               transition
               w-16 h-16

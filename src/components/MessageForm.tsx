@@ -1,14 +1,20 @@
 import { useState } from "react";
 import SelectMaru from "./SelectMaru";
+import type { MaruType } from "@/types/type";
 
-export default function MessageForm({
-  onSubmit
-}: {
-  onSubmit: (name: string, message: string) => void;
-}) {
+interface MessageFormProps {
+  onSubmit: (name: string, message: string, maru: MaruType) => void;
+}
+
+export default function MessageForm({ onSubmit }: MessageFormProps) {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
+  const [maru, setMaru] = useState<MaruType>(1);
   const [submit, setSubmit] = useState(false);
+
+  const handleMaruSelect = (id: MaruType) => {
+    setMaru(id);
+  };
 
   return (
     <div className="relative bg-white rounded-lg shadow-lg p-6 border border-blue-100 w-full">
@@ -18,13 +24,13 @@ export default function MessageForm({
         className="space-y-4"
         onSubmit={(e) => {
           e.preventDefault();
-          if (name && message) {
-            onSubmit(name, message);
+          if (name && message && maru) {
+            onSubmit(name, message, maru);
             setSubmit(true);
           }
         }}
       >
-        <SelectMaru />
+        <SelectMaru selectedMaru={maru} onSelect={handleMaruSelect} />
 
         <div>
           <label htmlFor="name" className="block text-base font-medium text-gray mb-1">

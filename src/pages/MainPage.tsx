@@ -2,10 +2,11 @@ import BannerSection from "@/components/BannerSection";
 import Header from "@/components/Header";
 import LinkButton from "@/components/LinkButton";
 import MessageForm from "@/components/MessageForm";
+import type { MaruType, MessageData } from "@/types/type";
 import { useState } from "react";
 
 const MainPage = () => {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<MessageData[]>([
     {
       name: "박준호",
       message: "4년 동안 정말 수고했어요! 새로운 시작을 응원합니다.",
@@ -48,16 +49,17 @@ const MainPage = () => {
     }
   ]);
 
-  const addMessage = (name: string, message: string) => {
-    setMessages([{ name, message, maru: 1 }, ...messages]);
+  const handleSubmit = (name: string, message: string, maru: MaruType) => {
+    setMessages([...messages, { name, message, maru }]);
   };
+  console.log(messages);
 
   return (
     <>
       <Header />
       <BannerSection data={messages} />
       <main className="grid grid-cols-1 px-7 bg-blue-50 pb-8">
-        <MessageForm onSubmit={addMessage} />
+        <MessageForm onSubmit={handleSubmit} />
       </main>
       <LinkButton />
     </>

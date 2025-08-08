@@ -1,5 +1,7 @@
 export interface MessageData {
   name: string;
   message: string | null;
-  maru: "center" | number;
+  maru: MaruType;
 }
+
+export type MaruType = "center" | number;
