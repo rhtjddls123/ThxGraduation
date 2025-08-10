@@ -8,15 +8,14 @@ import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
 import MessageModal from "./MessageModal";
 
 interface BannerSectionProps {
-  data: MessageData[];
+  data: MessageData;
 }
 
 export default function BannerSection({ data }: BannerSectionProps) {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
-
-  const sliceData = sliceArray(data);
+  const sliceData = sliceArray(data.posts);
 
   const handlePrev = () => {
     api?.scrollPrev();
@@ -48,7 +47,7 @@ export default function BannerSection({ data }: BannerSectionProps) {
                   alt="banner"
                   className="object-cover w-full z-0 relative rounded-lg min-h-[338px]"
                 />
-                <MaruImg name="고성인" type="center" order="center" />
+                <MaruImg name={data.owner} type="center" order="center" />
               </CarouselItem>
             )}
             {sliceData.map((datas, idx) => (
@@ -61,8 +60,8 @@ export default function BannerSection({ data }: BannerSectionProps) {
                   alt="banner"
                   className="object-cover w-full z-0 relative rounded-lg min-h-[338px]"
                 />
-                <MaruImg name="고성인" type="center" order="center" />
-                {datas.map(({ name, characterType, message }, idx) => (
+                <MaruImg name={data.owner} type="center" order="center" />
+                {datas.map(({ name, message, characterType }, idx) => (
                   <MessageModal name={name} message={message} key={`${name}-${idx}`}>
                     <MaruImg name={name} type={characterType} order={idx + 1} />
                   </MessageModal>
@@ -82,7 +81,7 @@ export default function BannerSection({ data }: BannerSectionProps) {
           </button>
         </div>
 
-        <CelebrationCount count={data.length} />
+        <CelebrationCount count={data.posts.length} />
       </div>
     </section>
   );

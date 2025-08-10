@@ -1,5 +1,7 @@
 import { authApi } from "@/services/authService";
+import { useAuthStore } from "@/store/useAuthStore";
 import { useMutation } from "@tanstack/react-query";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 export const useLogin = () => {
@@ -16,12 +18,38 @@ export const useLogin = () => {
 };
 
 export const useKakaoLogin = () => {
+  const { setLogin } = useAuthStore();
   const navigate = useNavigate();
+
   return useMutation({
     mutationFn: authApi.loginWithKakaoCode,
     onSuccess: (data) => {
+      setLogin({ value: true, name: data.name });
       navigate(`/${data.link}`);
     },
-    onError: () => {}
+    onError: () => {
+      setLogin({ value: false, name: undefined });
+    }
   });
+};
+
+export const useAuth = () => {
+  const setLogin = useAuthStore((state) => state.setLogin);
+
+  return useMutation({
+    mutationFn: authApi.tokenRefresh,
+    onSuccess: (data) => {
+      setLogin({ value: true, name: data.owner });
+    },
+    onError: () => {
+      setLogin({ value: false, name: undefined });
+    }
+  });
+};
+
+export const useIsLogin = () => {
+  const { mutate } = useAuth();
+  useEffect(() => {
+    mutate();
+  }, []);
 };

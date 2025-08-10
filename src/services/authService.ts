@@ -1,5 +1,5 @@
 import { instance } from "@/lib/axios";
-import type { LoginResponse } from "@/types/type";
+import type { LoginResponse, TokenRefreshResponse } from "@/types/type";
 import axios from "axios";
 
 export const authApi = {
@@ -27,8 +27,8 @@ export const authApi = {
   },
 
   tokenRefresh: async () => {
-    const res = await axios.post(
-      `${import.meta.env.VITE_BACKEND_URL}/auth/token/refresh`,
+    const res = await axios.post<TokenRefreshResponse>(
+      `${import.meta.env.VITE_BACKEND_URL}auth/token/refresh`,
       {},
       { withCredentials: true }
     );

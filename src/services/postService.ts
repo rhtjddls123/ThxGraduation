@@ -3,7 +3,7 @@ import type { AddPostRequest, MessageData } from "@/types/type";
 
 export const postApi = {
   getPosts: async (link: string) => {
-    const res = await instance.get<MessageData[]>(`/api/v1/post/${link}`);
+    const res = await instance.get<MessageData>(`/api/v1/post/${link}`);
 
     return res.data;
   },

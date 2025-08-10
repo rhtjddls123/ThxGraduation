@@ -2,6 +2,7 @@ import BannerSection from "@/components/BannerSection";
 import Header from "@/components/Header";
 import LinkButton from "@/components/LinkButton";
 import MessageForm from "@/components/MessageForm";
+import { useIsLogin } from "@/hooks/useAuth";
 import { useAddPost, useGetPosts } from "@/hooks/usePost";
 import type { MaruType } from "@/types/type";
 import { useParams } from "react-router-dom";
@@ -10,8 +11,8 @@ const MainPage = () => {
   const { uuid } = useParams<{ uuid: string }>();
   const { data, isPending, isError } = useGetPosts(uuid || "");
   const { mutateAsync, isPending: addIsPending } = useAddPost();
+  useIsLogin();
 
-  console.log(data);
   if (isPending || isError) return null;
 
   const handleSubmit = async (name: string, message: string, maru: MaruType) => {
