@@ -2,62 +2,28 @@ import BannerSection from "@/components/BannerSection";
 import Header from "@/components/Header";
 import LinkButton from "@/components/LinkButton";
 import MessageForm from "@/components/MessageForm";
-import type { MaruType, MessageData } from "@/types/type";
-import { useState } from "react";
+import { useAddPost, useGetPosts } from "@/hooks/usePost";
+import type { MaruType } from "@/types/type";
+import { useParams } from "react-router-dom";
 
 const MainPage = () => {
-  const [messages, setMessages] = useState<MessageData[]>([
-    {
-      name: "박준호",
-      message: "4년 동안 정말 수고했어요! 새로운 시작을 응원합니다.",
-      maru: 1
-    },
-    {
-      name: "이수연",
-      message: "드디어 졸업이네요! 앞으로 더 멋진 모습 기대할게요.",
-      maru: 3
-    },
-    {
-      name: "고성인",
-      message: "드디어 졸업이네요! 앞으로 더 멋진 모습 기대할게요.",
-      maru: 2
-    },
-    {
-      name: "백재혁",
-      message: "드디어 졸업이네요! 앞으로 더 멋진 모습 기대할게요.",
-      maru: 3
-    },
-    {
-      name: "박진현",
-      message: "드디어 졸업이네요! 앞으로 더 멋진 모습 기대할게요.",
-      maru: 5
-    },
-    {
-      name: "박진현",
-      message: "드디어 졸업이네요! 앞으로 더 멋진 모습 기대할게요.",
-      maru: 5
-    },
-    {
-      name: "박진현",
-      message: "드디어 졸업이네요! 앞으로 더 멋진 모습 기대할게요.",
-      maru: 5
-    },
-    {
-      name: "박진현",
-      message: "드디어 졸업이네요! 앞으로 더 멋진 모습 기대할게요.",
-      maru: 5
-    }
-  ]);
+  const { uuid } = useParams<{ uuid: string }>();
+  const { data, isPending, isError } = useGetPosts(uuid || "");
+  const { mutateAsync, isPending: addIsPending } = useAddPost();
 
-  const handleSubmit = (name: string, message: string, maru: MaruType) => {
-    setMessages([...messages, { name, message, maru }]);
+  console.log(data);
+  if (isPending || isError) return null;
+
+  const handleSubmit = async (name: string, message: string, maru: MaruType) => {
+    if (addIsPending) return null;
+
+    await mutateAsync({ data: { name, message, characterType: maru }, link: uuid || "" });
   };
-  console.log(messages);
 
   return (
     <>
       <Header />
-      <BannerSection data={messages} />
+      <BannerSection data={data} />
       <main className="grid grid-cols-1 px-7 bg-blue-50 pb-8">
         <MessageForm onSubmit={handleSubmit} />
       </main>

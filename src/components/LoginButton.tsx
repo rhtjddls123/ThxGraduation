@@ -9,7 +9,7 @@ const LoginButton = ({ className, ...props }: LoginButtonProps) => {
   return (
     <button
       className={cn(
-        " w-full h-13    px-6    py-4    flex justify-center items-center rounded-[1rem] relative bg-[rgb(245,225,75)] text-[rgb(55,31,31)] select-none font-semibold transition duration-150 hover:bg-yellow-400 active:brightness-90",
+        "w-full h-13 px-6 py-4 flex justify-center items-center rounded-[1rem] relative bg-[rgb(245,225,75)] text-[rgb(55,31,31)] select-none font-semibold transition duration-150 hover:bg-yellow-400 active:brightness-90",
         className
       )}
       {...props}

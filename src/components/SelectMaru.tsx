@@ -1,12 +1,12 @@
 import type { MaruType } from "@/types/type";
 import { Carousel, CarouselContent, CarouselItem } from "./ui/carousel";
 
-const maruList = [
-  { id: 1, name: "maru1", src: "/maru1.png" },
-  { id: 2, name: "maru2", src: "/maru2.png" },
-  { id: 3, name: "maru3", src: "/maru3.png" },
-  { id: 4, name: "maru4", src: "/maru4.png" },
-  { id: 5, name: "maru5", src: "/maru5.png" }
+const maruList: { id: MaruType; name: string; src: string }[] = [
+  { id: "STUDY", name: "maru1", src: "/maru1.png" },
+  { id: "CHEERLEADER", name: "maru2", src: "/maru2.png" },
+  { id: "REPORT_CARD", name: "maru3", src: "/maru3.png" },
+  { id: "CARROT", name: "maru4", src: "/maru4.png" },
+  { id: "BACKPACK", name: "maru5", src: "/maru5.png" }
 ];
 
 interface SelectMaruProps {

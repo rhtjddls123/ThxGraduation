@@ -9,7 +9,7 @@ interface MessageFormProps {
 export default function MessageForm({ onSubmit }: MessageFormProps) {
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
-  const [maru, setMaru] = useState<MaruType>(1);
+  const [maru, setMaru] = useState<MaruType>("STUDY");
   const [submit, setSubmit] = useState(false);
 
   const handleMaruSelect = (id: MaruType) => {

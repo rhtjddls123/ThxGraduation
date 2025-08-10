@@ -4,11 +4,15 @@ import "./index.css";
 import App from "./App.tsx";
 import { Analytics } from "@vercel/analytics/react";
 import { Toaster } from "sonner";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+const queryClient = new QueryClient();
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <App />
-    <Toaster />
-    <Analytics />
+    <QueryClientProvider client={queryClient}>
+      <App />
+      <Toaster />
+      <Analytics />
+    </QueryClientProvider>
   </StrictMode>
 );

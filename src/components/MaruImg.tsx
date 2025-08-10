@@ -1,15 +1,14 @@
 import { cn } from "@/lib/utils";
-
-type MaruType = "center" | number;
+import type { MaruType } from "@/types/type";
 
 interface MaruImgProps {
   type: MaruType;
-  order: MaruType;
+  order: "center" | number;
   name: string;
   textColor?: "black" | "white";
 }
 
-const stylesByType: Record<MaruType, { bottom: string; horizontalClass: string }> = {
+const stylesByType: Record<"center" | number, { bottom: string; horizontalClass: string }> = {
   center: {
     bottom: "24.01%",
     horizontalClass: ""
@@ -41,23 +40,23 @@ const maruStyle: Record<MaruType, { src: string; width: string }> = {
     src: "/maru_center.png",
     width: "clamp(113px, calc((100vw - 390px) / 410 * (179 - 113) + 113px), 179px)"
   },
-  5: {
+  BACKPACK: {
     src: "/maru5.png",
     width: "clamp(76px, calc((100vw - 390px) / 410 * (144 - 76) + 76px), 144px)"
   },
-  4: {
+  CARROT: {
     src: "/maru4.png",
     width: "clamp(90px, calc((100vw - 390px) / 410 * (156 - 90) + 90px), 156px)"
   },
-  3: {
+  REPORT_CARD: {
     src: "/maru3.png",
     width: "clamp(94px, calc((100vw - 390px) / 410 * (174 - 94) + 94px), 174px)"
   },
-  2: {
+  CHEERLEADER: {
     src: "/maru2.png",
     width: "clamp(77px, calc((100vw - 390px) / 410 * (139 - 77) + 77px), 139px)"
   },
-  1: {
+  STUDY: {
     src: "/maru1.png",
     width: "clamp(82px, calc((100vw - 390px) / 410 * (156 - 82) + 82px), 156px)"
   }

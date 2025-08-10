@@ -40,6 +40,16 @@ export default function BannerSection({ data }: BannerSectionProps) {
       <div className="relative w-full mx-auto">
         <Carousel setApi={setApi}>
           <CarouselContent className="ml-0">
+            {sliceData.length === 0 && (
+              <CarouselItem className="flex justify-center pt-4 bg-blue-50 w-full px-7 relative">
+                <img
+                  src="/banner.png"
+                  alt="banner"
+                  className="object-cover w-full z-0 relative rounded-lg min-h-[338px]"
+                />
+                <MaruImg name="고성인" type="center" order="center" />
+              </CarouselItem>
+            )}
             {sliceData.map((datas, idx) => (
               <CarouselItem
                 className="flex justify-center pt-4 bg-blue-50 w-full px-7 relative"
@@ -51,8 +61,13 @@ export default function BannerSection({ data }: BannerSectionProps) {
                   className="object-cover w-full z-0 relative rounded-lg min-h-[338px]"
                 />
                 <MaruImg name="고성인" type="center" order="center" />
-                {datas.map(({ maru, name }, idx) => (
-                  <MaruImg key={`${name}-${idx}`} name={name} type={maru} order={idx + 1} />
+                {datas.map(({ name, characterType }, idx) => (
+                  <MaruImg
+                    key={`${name}-${idx}`}
+                    name={name}
+                    type={characterType}
+                    order={idx + 1}
+                  />
                 ))}
               </CarouselItem>
             ))}
