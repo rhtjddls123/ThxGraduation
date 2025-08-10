@@ -15,3 +15,7 @@ export interface AddPostRequest {
   };
   link: string;
 }
+
+export interface LoginResponse {
+  link: string;
+}

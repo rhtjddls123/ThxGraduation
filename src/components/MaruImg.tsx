@@ -67,7 +67,7 @@ const MaruImg = ({ type, name, textColor = "black", order }: MaruImgProps) => {
   const { src, width } = maruStyle[type];
 
   return (
-    <button
+    <div
       className={cn("absolute flex flex-col items-center cursor-pointer", horizontalClass)}
       style={{ bottom }}
     >
@@ -83,7 +83,7 @@ const MaruImg = ({ type, name, textColor = "black", order }: MaruImgProps) => {
         {name}
       </span>
       <img src={src} alt={name} style={{ width }} />
-    </button>
+    </div>
   );
 };
 

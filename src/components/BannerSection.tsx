@@ -5,6 +5,7 @@ import { sliceArray } from "@/utils/sliceArray";
 import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "./ui/carousel";
 import { useEffect, useState } from "react";
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react";
+import MessageModal from "./MessageModal";
 
 interface BannerSectionProps {
   data: MessageData[];
@@ -61,13 +62,10 @@ export default function BannerSection({ data }: BannerSectionProps) {
                   className="object-cover w-full z-0 relative rounded-lg min-h-[338px]"
                 />
                 <MaruImg name="고성인" type="center" order="center" />
-                {datas.map(({ name, characterType }, idx) => (
-                  <MaruImg
-                    key={`${name}-${idx}`}
-                    name={name}
-                    type={characterType}
-                    order={idx + 1}
-                  />
+                {datas.map(({ name, characterType, message }, idx) => (
+                  <MessageModal name={name} message={message} key={`${name}-${idx}`}>
+                    <MaruImg name={name} type={characterType} order={idx + 1} />
+                  </MessageModal>
                 ))}
               </CarouselItem>
             ))}

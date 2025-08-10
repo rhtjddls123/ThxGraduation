@@ -1,18 +1,24 @@
 import { instance } from "@/lib/axios";
+import type { LoginResponse } from "@/types/type";
 import axios from "axios";
 
 export const authApi = {
-  // login: async (data: LoginRequest) => {
-  //   const res = await axios.post<LoginResponse>(
-  //     `${import.meta.env.VITE_BACKEND_URL}/api/v1/auth/sign-in`,
-  //     data,
-  //     {
-  //       withCredentials: true
-  //     }
-  //   );
+  login: async () => {
+    const res = await instance.get(`/oauth/kakao/login`);
+    return res.data;
+  },
 
-  //   return res.data;
-  // },
+  loginWithKakaoCode: async (code: string) => {
+    const res = await axios.get<LoginResponse>(
+      "https://thinkboo.duckdns.org/oauth/kakao/callback",
+      {
+        params: { code },
+        withCredentials: true
+      }
+    );
+
+    return res.data;
+  },
 
   logout: async () => {
     const res = await instance.post("/auth/logout");

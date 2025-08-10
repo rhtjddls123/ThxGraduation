@@ -22,6 +22,7 @@ const SelectMaru = ({ selectedMaru, onSelect }: SelectMaruProps) => {
         {maruList.map((maru) => (
           <CarouselItem key={maru.id} className="basis-auto pl-0">
             <button
+              type="button"
               onClick={() => onSelect(maru.id)}
               className={`rounded-full border-4 
               ${

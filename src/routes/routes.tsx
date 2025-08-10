@@ -1,3 +1,4 @@
+import KakaoLoginPage from "@/pages/KakaoLoginPage";
 import LandingPage from "@/pages/LandingPage";
 import MainPage from "@/pages/MainPage";
 import RootLayout from "@/pages/RootLayout";
@@ -12,7 +13,11 @@ const router = createBrowserRouter([
         index: true,
         element: <LandingPage />
       },
-      { path: "/:uuid", element: <MainPage /> }
+      { path: "/:uuid", element: <MainPage /> },
+      {
+        path: "/login/kakao",
+        element: <KakaoLoginPage />
+      }
     ]
   }
 ]);
