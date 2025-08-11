@@ -11,7 +11,10 @@
     {
       "source": "/auth/:path*",
       "destination": "https://thinkboo.duckdns.org/auth/:path*"
+    },
+    {
+      "source": "/:path((?!.*\\.).*)",
+      "destination": "/"
     }
-  ],
-  "routes": [{ "src": "/[^.]+", "dest": "/", "status": 200 }]
+  ]
 }
