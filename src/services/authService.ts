@@ -28,7 +28,7 @@ export const authApi = {
 
   tokenRefresh: async () => {
     const res = await axios.post<TokenRefreshResponse>(
-      `${import.meta.env.VITE_BACKEND_URL}auth/token/refresh`,
+      `/auth/token/refresh`,
       {},
       { withCredentials: true }
     );
